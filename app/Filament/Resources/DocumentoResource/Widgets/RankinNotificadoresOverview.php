@@ -23,7 +23,9 @@ class RankinNotificadoresOverview extends BaseWidget
                      ->whereColumn('documentos.user_id', 'users.id');
            })
            ->count();
-        $notis=NotificacionDocumento::select(DB::raw("SPLIT_PART(name, ' ', 1) as nombre"), DB::raw('count(*) as notis'))
+           
+           //$notis=NotificacionDocumento::select(DB::raw("SPLIT_PART(name, ' ', 1) as nombre"), DB::raw('count(*) as notis'))
+           $notis=NotificacionDocumento::select(DB::raw("SUBSTRING_INDEX(name, ' ', 1) as nombre"), DB::raw('count(*) as notis'))
            ->join('users', 'users.id', '=', 'notificacion_documentos.user_id')
            ->where('notificacion_documentos.tipo_documento_id', '=',Auth::user()->tipo_documento_id)
         ->orderBy('notis','desc')  
