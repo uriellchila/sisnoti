@@ -24,7 +24,7 @@ class AsignadosTable extends BaseWidget
         return $table
             ->query(
                 Documento::query()
-                ->select('documentos.id',DB::raw("SPLIT_PART(u.name, ' ', 1) as nombre"),'fecha_para','numero_doc','codigo','razon_social',
+                ->select('documentos.id',DB::raw("SUBSTRING_INDEX(u.name, ' ', 1) as nombre"),'fecha_para','numero_doc','codigo','razon_social',
                 DB::raw('(select tn.nombre from notificacion_documentos as nd inner join tipo_notificacions as tn on tn.id = nd.tipo_notificacion_id  where user_id=documentos.user_id and nd.deleted_at is null and documentos.id = documento_id LIMIT 1) as notificado'),
                 DB::raw('(select md.nombre from devolucion_documentos as dd inner join motivo_devolucions as md on md.id =dd.motivo_devolucion_id where user_id=documentos.user_id and dd.deleted_at is null and documentos.id = documento_id LIMIT 1) as devuelto')
                 )

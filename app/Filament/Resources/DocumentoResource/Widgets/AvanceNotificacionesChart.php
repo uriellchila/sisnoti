@@ -18,7 +18,9 @@ class AvanceNotificacionesChart extends ChartWidget
     protected function getData(): array
     {
         $activeFilter = $this->filter;
-        $notificaciones=User::select(DB::raw("SPLIT_PART(name, ' ', 1) as nombre"), 
+        
+        //$notificaciones=User::select(DB::raw("SPLIT_PART(name, ' ', 1) as nombre"), 
+        $notificaciones=User::select(DB::raw("SUBSTRING_INDEX(name, ' ', 1) as nombre"), 
         DB::raw('(select count(*) from documentos where user_id=users.id and deleted_at is null and tipo_documento_id='.Auth::user()->tipo_documento_id.') as asignados'),
         DB::raw('(select count(*) from notificacion_documentos where user_id=users.id and deleted_at is null and tipo_documento_id='.Auth::user()->tipo_documento_id.') as notificados')
         )
