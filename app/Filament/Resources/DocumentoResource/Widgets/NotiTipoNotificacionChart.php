@@ -18,7 +18,7 @@ class NotiTipoNotificacionChart extends ChartWidget
     {
 
         //$notificaciones=User::select(DB::raw("SUBSTRING_INDEX(name, ' ', 1) as nombre"), 
-        $notificaciones=User::select(DB::raw("SPLIT_PART(name, ' ', 1) as nombre"), 
+        $notificaciones=User::select(DB::raw("SUBSTRING_INDEX(name, ' ', 1) as nombre"), 
         DB::raw('(select count(*) from notificacion_documentos where user_id=users.id and tipo_notificacion_id = 1 and deleted_at is null and tipo_documento_id = '.Auth::user()->tipo_documento_id.') as recepcionados'),
         DB::raw('(select count(*) from notificacion_documentos where user_id=users.id and tipo_notificacion_id = 2 and deleted_at is null and tipo_documento_id = '.Auth::user()->tipo_documento_id.') as cedulon'),
         DB::raw('(select count(*) from notificacion_documentos where user_id=users.id and tipo_notificacion_id = 3 and deleted_at is null and tipo_documento_id = '.Auth::user()->tipo_documento_id.') as correo'),
