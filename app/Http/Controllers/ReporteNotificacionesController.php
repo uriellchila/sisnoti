@@ -316,7 +316,7 @@ class ReporteNotificacionesController extends Controller
         DB::raw('count(distinct numero_doc) as cantidad'), 
         DB::raw('count(distinct fecha_notificacion) as dias'), 
        //B::raw('count(*)/count(distinct fecha_notificacion)::DOUBLE PRECISION as promedio')
-       B::raw('count(*)/count(distinct fecha_notificacion) as promedio')
+       DB::raw('count(*)/count(distinct fecha_notificacion) as promedio')
       /* DB::raw(
             '(select count(*) from notificacion_documentos as nd
             where nd.deleted_at is null and u.id = nd.user_id) as dias'),*/
