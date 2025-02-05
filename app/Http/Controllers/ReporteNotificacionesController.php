@@ -315,7 +315,8 @@ class ReporteNotificacionesController extends Controller
         $notis=NotificacionDocumento::select("name", 
         DB::raw('count(distinct numero_doc) as cantidad'), 
         DB::raw('count(distinct fecha_notificacion) as dias'), 
-        DB::raw('count(*)/count(distinct fecha_notificacion)::DOUBLE PRECISION as promedio')
+       //B::raw('count(*)/count(distinct fecha_notificacion)::DOUBLE PRECISION as promedio')
+       B::raw('count(*)/count(distinct fecha_notificacion) as promedio')
       /* DB::raw(
             '(select count(*) from notificacion_documentos as nd
             where nd.deleted_at is null and u.id = nd.user_id) as dias'),*/
@@ -357,7 +358,8 @@ class ReporteNotificacionesController extends Controller
             inner join tipo_notificacions as tn on tn.id = nd.tipo_notificacion_id
             where nd.deleted_at is null and u.id = d.user_id and nd.fecha_notificacion >= '".$fh_ini."' and nd.fecha_notificacion <= '".$fh_fin."' and  nd.tipo_notificacion_id = 4 ) as negatividad"), 
         DB::raw('count(distinct fecha_notificacion) as dias'), 
-        DB::raw('count(*)/count(distinct fecha_notificacion)::DOUBLE PRECISION as promedio')
+        //::raw('count(*)/count(distinct fecha_notificacion)::DOUBLE PRECISION as promedio')
+        DB::raw('count(*)/count(distinct fecha_notificacion) as promedio')
       /* DB::raw(
             '(select count(*) from notificacion_documentos as nd
             where nd.deleted_at is null and u.id = nd.user_id) as dias'),*/
