@@ -390,7 +390,8 @@ class ReporteNotificacionesController extends Controller
             $notis=NotificacionDocumento::select("name", 
             DB::raw('count(distinct numero_doc) as cantidad'), 
             DB::raw('count(distinct fecha_notificacion) as dias'), 
-            DB::raw('count(*)/count(distinct fecha_notificacion)::DOUBLE as promedio')
+            //DB::raw('count(*)/count(distinct fecha_notificacion)::DOUBLE as promedio')
+            DB::raw('count(*)/count(distinct fecha_notificacion) as promedio')
           /* DB::raw(
                 '(select count(*) from notificacion_documentos as nd
                 where nd.deleted_at is null and u.id = nd.user_id) as dias'),*/
